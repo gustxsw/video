@@ -42,15 +42,14 @@
             100% { text-shadow: 0 0 15px red; }
         }
 
-        .word {
+        .letter {
             opacity: 0;
             display: inline-block;
-            margin: 5px 10px;
             transform: translateY(10px);
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
         }
 
-        .word.visible {
+        .letter.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -60,10 +59,6 @@
                 font-size: 8vw;
                 letter-spacing: -1px;
             }
-
-            .word {
-                margin: 3px 6px;
-            }
         }
     </style>
 </head>
@@ -72,29 +67,43 @@
 
     <script>
         const textContainer = document.getElementById("text");
-        const words = ["Quer", "surpreender", "seu", "amor", "com", "algo", "<span class='highlight'>INESQUECÍVEL?</span>"];
+        const words = ["Quer", "surpreender", "seu", "amor", "com", "algo", "INESQUECÍVEL?"];
         const totalTime = 2500; // Tempo total de 2,5 segundos
-        const interval = totalTime / words.length; // Tempo para cada palavra
+        let totalLetters = words.join(" ").length; // Conta todas as letras + espaços
+        const interval = totalTime / totalLetters; // Tempo para cada caractere
 
-        let index = 0;
+        function showLetters() {
+            let currentIndex = 0;
 
-        function showWord() {
-            if (index < words.length) {
-                let span = document.createElement("span");
-                span.classList.add("word");
-                span.innerHTML = words[index];
-                textContainer.appendChild(span);
+            words.forEach((word, wordIndex) => {
+                [...word].forEach((char, letterIndex) => {
+                    setTimeout(() => {
+                        let span = document.createElement("span");
+                        span.classList.add("letter");
+                        if (wordIndex === words.length - 1) {
+                            span.innerHTML = `<span class="highlight">${char}</span>`;
+                        } else {
+                            span.textContent = char;
+                        }
+                        textContainer.appendChild(span);
+                        setTimeout(() => span.classList.add("visible"), 50);
+                    }, currentIndex * interval);
+                    currentIndex++;
+                });
 
-                setTimeout(() => {
-                    span.classList.add("visible");
-                }, 50);
-
-                index++;
-                setTimeout(showWord, interval);
-            }
+                // Adiciona o espaço entre palavras
+                if (wordIndex < words.length - 1) {
+                    setTimeout(() => {
+                        let space = document.createElement("span");
+                        space.textContent = " ";
+                        textContainer.appendChild(space);
+                    }, currentIndex * interval);
+                    currentIndex++;
+                }
+            });
         }
 
-        showWord();
+        showLetters();
     </script>
 </body>
 </html>
