@@ -40,7 +40,7 @@
 
         @keyframes typing {
             from { width: 0; }
-            to { width: 29ch; } /* Define o tamanho exato da frase */
+            to { width: 48ch; } /* Define o tamanho exato da frase */
         }
 
         @keyframes blink {
@@ -51,27 +51,11 @@
             0% { text-shadow: 0 0 5px red; }
             100% { text-shadow: 0 0 15px red; }
         }
-
-        @keyframes zoom {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
-        }
-
-        .zoom {
-            animation: zoom 0.5s ease-in-out forwards;
-            border-right: none; /* Remove o cursor após o zoom */
-        }
     </style>
 </head>
 <body>
     <div class="container" id="text">
         Quer surpreender seu amor com algo <span class="highlight">INESQUECÍVEL?</span>
     </div>
-
-    <script>
-        setTimeout(() => {
-            document.getElementById('text').classList.add('zoom');
-        }, 2200); // Aplica o zoom após a animação de digitação terminar
-    </script>
 </body>
 </html>
