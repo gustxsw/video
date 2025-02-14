@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa Inesquecível</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            font-size: 2rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            border-right: 3px solid white;
+            animation: typing 2s steps(30, end) forwards, blink 0.8s infinite;
+        }
+
+        .highlight {
+            color: red;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 29ch; } /* Define o tamanho exato da frase */
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px red; }
+            100% { text-shadow: 0 0 15px red; }
+        }
+
+        @keyframes zoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .zoom {
+            animation: zoom 0.5s ease-in-out forwards;
+            border-right: none; /* Remove o cursor após o zoom */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="text">
+        Quer surpreender seu amor com algo <span class="highlight">INESQUECÍVEL?</span>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('text').classList.add('zoom');
+        }, 2200); // Aplica o zoom após a animação de digitação terminar
+    </script>
+</body>
+</html>
