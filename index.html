@@ -54,10 +54,18 @@
             transform: translateY(0);
         }
 
+        .space {
+            display: inline-block;
+            width: 10px; /* Ajuste o valor para aumentar ou diminuir o espaço entre palavras */
+        }
+
         @media (max-width: 480px) {
             .container {
                 font-size: 8vw;
                 letter-spacing: -1px;
+            }
+            .space {
+                width: 5px; /* Espaço menor entre palavras no celular */
             }
         }
     </style>
@@ -69,7 +77,7 @@
         const textContainer = document.getElementById("text");
         const words = ["Quer", "surpreender", "seu", "amor", "com", "algo", "INESQUECÍVEL?"];
         const totalTime = 2500; // Tempo total de 2,5 segundos
-        let totalLetters = words.join(" ").length; // Conta todas as letras + espaços
+        let totalLetters = words.join("").length + words.length - 1; // Conta todas as letras + espaços
         const interval = totalTime / totalLetters; // Tempo para cada caractere
 
         function showLetters() {
@@ -91,11 +99,11 @@
                     currentIndex++;
                 });
 
-                // Adiciona o espaço entre palavras
+                // Adiciona um espaço maior entre palavras
                 if (wordIndex < words.length - 1) {
                     setTimeout(() => {
                         let space = document.createElement("span");
-                        space.textContent = " ";
+                        space.classList.add("space");
                         textContainer.appendChild(space);
                     }, currentIndex * interval);
                     currentIndex++;
