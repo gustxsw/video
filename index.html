@@ -30,6 +30,8 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            word-wrap: break-word; /* Garante que palavras longas vão para a linha de baixo */
+            white-space: normal;
         }
 
         .highlight {
@@ -40,6 +42,12 @@
         @keyframes pulse {
             0% { text-shadow: 0 0 5px red; }
             100% { text-shadow: 0 0 15px red; }
+        }
+
+        .word {
+            display: inline-block;
+            margin: 0 5px; /* Mantém um espaço entre palavras */
+            white-space: nowrap; /* Garante que as palavras não quebrem no meio */
         }
 
         .letter {
@@ -54,18 +62,10 @@
             transform: translateY(0);
         }
 
-        .space {
-            display: inline-block;
-            width: 10px; /* Ajuste o valor para aumentar ou diminuir o espaço entre palavras */
-        }
-
         @media (max-width: 480px) {
             .container {
                 font-size: 8vw;
                 letter-spacing: -1px;
-            }
-            .space {
-                width: 5px; /* Espaço menor entre palavras no celular */
             }
         }
     </style>
@@ -84,6 +84,9 @@
             let currentIndex = 0;
 
             words.forEach((word, wordIndex) => {
+                let wordSpan = document.createElement("span");
+                wordSpan.classList.add("word");
+
                 [...word].forEach((char, letterIndex) => {
                     setTimeout(() => {
                         let span = document.createElement("span");
@@ -93,21 +96,13 @@
                         } else {
                             span.textContent = char;
                         }
-                        textContainer.appendChild(span);
+                        wordSpan.appendChild(span);
                         setTimeout(() => span.classList.add("visible"), 50);
                     }, currentIndex * interval);
                     currentIndex++;
                 });
 
-                // Adiciona um espaço maior entre palavras
-                if (wordIndex < words.length - 1) {
-                    setTimeout(() => {
-                        let space = document.createElement("span");
-                        space.classList.add("space");
-                        textContainer.appendChild(space);
-                    }, currentIndex * interval);
-                    currentIndex++;
-                }
+                textContainer.appendChild(wordSpan);
             });
         }
 
