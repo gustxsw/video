@@ -28,7 +28,7 @@
             font-weight: bold;
             max-width: 90%;
             display: flex;
-            flex-wrap: wrap; /* Permite quebra de linha automática */
+            flex-wrap: wrap;
             justify-content: center;
         }
 
@@ -45,9 +45,9 @@
         .word {
             opacity: 0;
             display: inline-block;
-            margin: 5px 10px; /* Espaçamento entre palavras */
+            margin: 5px 10px;
             transform: translateY(10px);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
         }
 
         .word.visible {
@@ -58,6 +58,11 @@
         @media (max-width: 480px) {
             .container {
                 font-size: 8vw;
+                letter-spacing: -1px;
+            }
+
+            .word {
+                margin: 3px 6px;
             }
         }
     </style>
@@ -68,6 +73,9 @@
     <script>
         const textContainer = document.getElementById("text");
         const words = ["Quer", "surpreender", "seu", "amor", "com", "algo", "<span class='highlight'>INESQUECÍVEL?</span>"];
+        const totalTime = 2500; // Tempo total de 2,5 segundos
+        const interval = totalTime / words.length; // Tempo para cada palavra
+
         let index = 0;
 
         function showWord() {
@@ -79,10 +87,10 @@
 
                 setTimeout(() => {
                     span.classList.add("visible");
-                }, 100);
+                }, 50);
 
                 index++;
-                setTimeout(showWord, 700); // Tempo entre cada palavra
+                setTimeout(showWord, interval);
             }
         }
 
