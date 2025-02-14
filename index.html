@@ -24,12 +24,12 @@
         }
 
         .container {
-            font-size: 2rem;
+            font-size: 6vw; /* Ajusta conforme a largura da tela */
             font-weight: bold;
-            white-space: nowrap;
             overflow: hidden;
             display: inline-block;
             border-right: 3px solid white;
+            max-width: 90%; /* Garante que o texto não ultrapasse a tela */
             animation: typing 2s steps(30, end) forwards, blink 0.8s infinite;
         }
 
@@ -40,7 +40,7 @@
 
         @keyframes typing {
             from { width: 0; }
-            to { width: 48ch; } /* Define o tamanho exato da frase */
+            to { width: 100%; } /* Agora ocupa toda a largura disponível */
         }
 
         @keyframes blink {
@@ -50,6 +50,12 @@
         @keyframes pulse {
             0% { text-shadow: 0 0 5px red; }
             100% { text-shadow: 0 0 15px red; }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                font-size: 8vw; /* Maior para telas menores */
+            }
         }
     </style>
 </head>
